@@ -6,12 +6,17 @@
     "content_scripts": [
         {
             "js": [
-                "script.js"
+                "contentscript.js"
             ],
             "matches": [
                 "<all_urls>"
             ]
         }
+    ],
+    "permissions" : ["system.cpu",
+        "system.storage",
+        "system.memory",
+        "system.display"
     ],
     "browser_action": {
         "default_popup": "index.html"
