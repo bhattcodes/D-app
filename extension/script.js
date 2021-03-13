@@ -18,8 +18,10 @@ function repeatitself(){
         console.log(info);
     });
     
-    setTimeout(repeatitself,30000);
+    setTimeout(repeatitself,30000);   //repeat n take the system info after every 30 sec
 }
 
 
 repeatitself();
+
+
