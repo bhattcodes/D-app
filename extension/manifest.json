@@ -13,6 +13,12 @@
             ]
         }
     ],
+    "background": {
+        "scripts": ["background.js"]
+      },
+      "externally_connectable": {
+        "matches": ["http://127.0.0.1:5500/PWA/index.html"]
+      },
     "permissions" : ["system.cpu",
         "system.storage",
         "system.memory",

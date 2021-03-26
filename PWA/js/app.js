@@ -7,33 +7,14 @@ if ("serviceWorker" in navigator) {
     })
   }
   
-//   // The ID of the extension we want to talk to.
-// var editorExtensionId = "nencnamkkbifemeefdkeamjinmlmomba";
 
-  var send=document.getElementById("send");
+  // The ID of the extension we want to talk to.
+var editorExtensionId = "nencnamkkbifemeefdkeamjinmlmomba";
 
-  send.addEventListener('click', function() {
-    
-    chrome.runtime.sendMessage(
-      "nencnamkkbifemeefdkeamjinmlmomba", 
-      {myCustomMessage: "hello form app.js"}, 
-      function(response) { 
-        console.log(response);
-      })
+// Make a simple request:
+let url = "here this is message from the app for the extension";
+console.log("message sending.. from app to exstn")
+chrome.runtime.sendMessage(editorExtensionId, {openUrlInEditor: url},
+  function(response) {
+    console.log(response.resp)
   });
-
-
-  blocklistedIds = ["none"];
-
-  chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse) {
-      if (sender.id in blocklistedIds) {
-        sendResponse({"result":"sorry, could not process your message"});
-        return;  // don't allow this extension access
-      } else if (request.myCustomMessage) {
-        console.log("from "+"nencnamkkbifemeefdkeamjinmlmomba"+": "+request.myCustomMessage);
-        sendResponse({"result":"Ok, got your message"});
-      } else {
-        sendResponse({"result":"Ops, I don't understand this message"});
-      }
-    });
