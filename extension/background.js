@@ -1,62 +1,48 @@
 var blocklistedIds = ["none"];
 console.log("hello in backgroundjs exstnn");
+let obj={};
+
+function get_info() {
 
 
-function repeatitself(){
-    
-    chrome.system.cpu.getInfo(function(info) {
-        console.log(info);
-    });
-    
-    chrome.system.storage.getInfo(function(info) {
-        console.log(info);
-    });
-    
-    chrome.system.memory.getInfo(function(info) {
-        console.log(info);
-    });
-    
-    chrome.system.display.getInfo(function(info) {
-        console.log(info);
-    });
-    
-    // setTimeout(repeatitself,30000);   //repeat n take the system info after every 30 sec
+  chrome.system.cpu.getInfo(function (info) {
+    // console.log(info);
+    obj.cpu = info
+  });
+
+  chrome.system.storage.getInfo(function (info) {
+    // console.log(info);
+    obj.storage = info;
+  });
+
+  chrome.system.memory.getInfo(function (info) {
+    // console.log(info);
+    obj.memory = info;
+  });
+
+  chrome.system.display.getInfo(function (info) {
+    // console.log(info);
+    obj.display = info;
+  });
+
+  // setTimeout(repeatitself,30000);   //repeat n take the system info after every 30 sec
 }
 
+// get_info();
 
-repeatitself();
-
-
+// console.log(obj);
 
 
 chrome.runtime.onMessageExternal.addListener(
-  function(request, sender, sendResponse) {
+  function (request, sender, sendResponse) {
     if (sender.url == blocklistedIds)
       return;  // don't allow this web page access
     if (request.openUrlInEditor)
+      get_info();
+
+      console.log("after rqtdd",obj);
+
       console.log(request.openUrlInEditor);
-      sendResponse({resp: "response from the extension,to app got ur messsage succsfully"});
+    sendResponse({ resp: obj });
 
-    });
-
-
-
-
-
-
-
-
-// chrome.runtime.onMessageExternal.addListener(
-//   function(request, sender, sendResponse) {
-//     if (sender.id in blocklistedIds) {
-//       sendResponse({"result":"sorry, could not process your message"});
-//       return;  // don't allow this extension access
-//     } else if (request.myCustomMessage) {
-//       console.log('Got message from ',sender.id, request.myCustomMessage);
-//       sendResponse({"result":"Ok, got your message"});
-//     } else {
-//       sendResponse({"result":"Ops, I don't understand this message"});
-//     }
-//   });
-
-
+  });
