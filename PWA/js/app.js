@@ -20,8 +20,10 @@ chrome.runtime.sendMessage(editorExtensionId, {openUrlInEditor: url},
   function(response) {
     x = (response.resp);
     console.log(x);
+    // document.getElementById("cont").innerHTML = `<p> ${JSON.stringify(x)} </p>`;    //showing in html
   });
 })
+
 
 
 

@@ -2,7 +2,7 @@
     "theme_color": "#4a90e2",
     "background_color": "#4a90e2",
     "display": "standalone",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "name": "abx pwa",
     "short_name": "pwa",
     "description": "pwa",
