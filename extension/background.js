@@ -25,6 +25,8 @@ function get_info() {
     obj.display = info;
   });
 
+  obj.navigator = window.navigator.appCodeName;
+
   // setTimeout(repeatitself,30000);   //repeat n take the system info after every 30 sec
 }
 
@@ -43,6 +45,6 @@ chrome.runtime.onMessageExternal.addListener(
       console.log("after rqtdd",obj);
 
       console.log(request.openUrlInEditor);
-    sendResponse({ resp: obj });
+    sendResponse({ resp: JSON.stringify(obj) });
 
   });
