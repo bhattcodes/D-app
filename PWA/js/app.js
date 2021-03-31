@@ -37,6 +37,8 @@ function cpu_usage() {
 
   function loop() {
     fetch_data();
+    sum_K1= sum_U1 = sum_K2 = sum_U2= sum_TOTAL1= sum_TOTAL2=0;    
+
     for (var i = 0; i < x.cpu.numOfProcessors; i++) {
       sum_K1 = sum_K1 + x.cpu.processors[i].usage.kernel;
       sum_U1 = sum_U1 + x.cpu.processors[i].usage.user;
@@ -61,7 +63,24 @@ function cpu_usage() {
       cpu_usage_percentage = 100 - ((delta_K + delta_U) / delta_TOTAL  *100);
       console.log("cpu usage percentage=", cpu_usage_percentage);
     }, 1000);
+
   }
+
+}
+
+function update_ui(obj){
+
+  let storage= 0;
+  for(var i=0; i<obj.storage.length; i++){
+    storage = storage + (obj.storage[i].capacity/1000000000);
+    console.log(storage);
+  }
+
+  document.querySelector("#content > div > div:nth-child(2) > div:nth-child(1) > div > div > div > div.col.mr-2 > div.text-dark.font-weight-bold.h5.mb-0 > span").innerHTML = obj.cpu.modelName;
+  document.querySelector("#content > div > div:nth-child(2) > div:nth-child(4) > div > div > div > div.col.mr-2 > div.text-dark.font-weight-bold.h5.mb-0 > span").innerHTML = obj.cpu.archName;
+  document.querySelector("#content > div > div:nth-child(2) > div:nth-child(3) > div > div > div > div.col.mr-2 > div.row.no-gutters.align-items-center > div > div > span").innerHTML = obj.cpu.numOfProcessors;
+  document.querySelector("#content > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div.col.mr-2 > div.text-dark.font-weight-bold.h5.mb-0 > span").innerHTML = Math.floor(storage)+" GB";
+
 
 }
 
@@ -73,6 +92,7 @@ function fetch_data() {
     function (response) {
       x = JSON.parse(response.resp);
       console.log(x);
+      update_ui(x);
       // document.getElementById("cont").innerHTML = `<p> ${JSON.stringify(x)} </p>`;    //showing in html
     });
 }
@@ -97,30 +117,6 @@ function fetch_data() {
 
 
 
-// function cpu_usage2() {
-//   var cpuInfo = x.cpu;
-//   var previousCpuInfo;
-//   var sumOfUsage = 0;
-
-//   for (var i = 0; i < cpuInfo.numOfProcessors; i++) {
-//     var usage = cpuInfo.processors[i].usage;
-//     var usedSectionWidth = 0;
-
-//     if (previousCpuInfo) {
-//       var oldUsage = previousCpuInfo.processors[i].usage;
-//       usedSectionWidth = Math.floor((usage.kernel + usage.user - oldUsage.kernel - oldUsage.user) / (usage.total - oldUsage.total) * 100);
-//     } else {
-//       usedSectionWidth = Math.floor((usage.kernel + usage.user) / usage.total * 100);
-//     }
-//     console.log("used selection width=",usedSectionWidth);
-//     sumOfUsage = sumOfUsage + usedSectionWidth;
-
-//   }
-//   previousCpuInfo = cpuInfo;
-//   console.log("usage=",Math.floor(100 - sumOfUsage / 4));
-
-//   // callback(Math.floor(100 - sumOfUsage / 4));
-// }
 
 
 
