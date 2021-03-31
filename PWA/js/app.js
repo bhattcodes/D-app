@@ -79,21 +79,21 @@ function fetch_data() {
 
 
 
-document.getElementById("btn").addEventListener("click", () => {
-  fetch_data();
-})
+// document.getElementById("btn").addEventListener("click", () => {
+//   fetch_data();
+// })
 
-document.getElementById("btn2").addEventListener("click", () => {
-  cpu_usage();
-})
+// document.getElementById("btn2").addEventListener("click", () => {
+//   cpu_usage();
+// })
 
-document.getElementById("btn3").addEventListener("click", () => {
-  clearInterval(cpu_interval);
-})
+// document.getElementById("btn3").addEventListener("click", () => {
+//   clearInterval(cpu_interval);
+// })
 
-document.getElementById("btn4").addEventListener("click", () => {
-  console.log(memory_percentage());
-})
+// document.getElementById("btn4").addEventListener("click", () => {
+//   console.log(memory_percentage());
+// })
 
 
 
